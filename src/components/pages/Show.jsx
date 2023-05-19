@@ -32,7 +32,7 @@ const Show = (props) => {
   // handling submit event for edit form
   const handleUpdate = (e) => {
     e.preventDefault();
-    props.updateStudent(editForm, selectedPerson._id);
+    props.updatePeople(editForm, selectedPerson._id);
   };
 
   const handleEdit = () => {
@@ -40,7 +40,7 @@ const Show = (props) => {
   };
 
   const handleDelete = () => {
-    props.deleteStudent(selectedPerson._id);
+    props.deletePeople(selectedPerson._id);
     navigate('/');
   };
 
