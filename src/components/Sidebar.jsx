@@ -2,20 +2,24 @@ import React from 'react'
 import Avatar from '../img/img.gif'
 import "../styles/components/sidebar.sass"
 
+import { Link } from 'react-router-dom';
+
 const Sidebar = () => {
   return (
     <aside id="sidebar">
-    <img src={Avatar} alt="logo"/>
+      <img src={Avatar} alt="logo" />
 
-    <a className="menu" href="/home">Home</a>
-    <a className="menu" href="/network">Network</a>
-    <a className="menu" href="/events">Events</a>
-
-    
-
-
+      <Link className="menu" to="/home">
+        Home
+      </Link>
+      <Link className="menu" to="/network">
+        Network
+      </Link>
+      <Link className="menu" to="/events">
+        Events
+      </Link>
     </aside>
-  )
-}
+  );
+};
 
 export default Sidebar
