@@ -9,7 +9,7 @@ const Sidebar = () => {
     <aside id="sidebar">
       <img src={Avatar} alt="logo" />
 
-      <Link className="menu" to="/home">
+      <Link className="menu" to="/">
         Home
       </Link>
       <Link className="menu" to="/network">

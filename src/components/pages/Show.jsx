@@ -5,20 +5,20 @@ import { useState, useEffect } from 'react';
 const Show = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const student = props.student;
+  const people = props.person;
   console.log(id);
   
-  const stunden = student ? student.find((p) => p._id === id) : null;
+  const person = person ? person.find((p) => p._id === id) : null;
 
-  const [editForm, setEditForm] = useState(stunden);
-
+  const [editForm, setEditForm] = useState(person);
+  
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (stunden) {
-      setEditForm(stunden);
+    if (person) {
+      setEditForm(person);
     }
-  }, [stunden]);
+  }, [person]);
 
   // handling form data change
   const handleChange = (e) => {
@@ -31,7 +31,7 @@ const Show = (props) => {
   // handling submit event for edit form
   const handleUpdate = (e) => {
     e.preventDefault();
-    props.updateStudent(editForm, stunden._id);
+    props.updateStudent(editForm, person._id);
   };
 
   const handleEdit = () => {
@@ -39,23 +39,23 @@ const Show = (props) => {
   };
 
   const handleDelete = () => {
-    props.deleteStudent(stunden._id);
+    props.deleteStudent(person._id);
     navigate('/');
   };
 
   const loaded = () => {
     return (
       <>
-        <h1>{stunden.name}</h1>
-        <h2>{stunden.quote}</h2>
-        <h2>{stunden.linkedin}</h2>
-        <h2>{stunden.location}</h2>
+        <h1>{person.name}</h1>
+        <h2>{person.quote}</h2>
+        <h2>{person.linkedin}</h2>
+        <h2>{person.location}</h2>
         <img 
           className="avatar-image" 
-          src={stunden.photo} 
-          alt={stunden.name} 
+          src={person.photo} 
+          alt={person.name} 
         />
-        <h3>{stunden.title}</h3>
+        <h3>{person.title}</h3>
         <button onClick={handleDelete}>Delete</button>
         <button onClick={handleEdit}>{ isEditing ? 'Cancel Edit' : 'Edit' }</button>
       </>
@@ -67,8 +67,8 @@ const Show = (props) => {
   };
 
   return (
-    <div className="stunden">
-      { stunden ? loaded() : loading() }
+    <div className="person">
+      { person ? loaded() : loading() }
 
       { isEditing &&
       <form onSubmit={handleUpdate}>
@@ -83,7 +83,7 @@ const Show = (props) => {
           type="text"
           value={editForm.photo}
           name="photo"
-          placeholder="student photo"
+          placeholder="person photo"
           onChange={handleChange}
         />
         <input
@@ -108,7 +108,7 @@ const Show = (props) => {
           placeholder="location"
           onChange={handleChange}
         />
-        <input type="submit" value="Update Student" />
+        <input type="submit" value="Update Person" />
       </form>
       }
     </div>

@@ -6,9 +6,9 @@ import Show from "./pages/Show";
 import '../styles/components/mainpage.sass';
 
 function MainPage() {
-  const [student, setStudent] = useState(null);
+  const [person, setStudent] = useState(null);
 
-  const URL = "http://localhost:4000/student";
+  const URL = "http://localhost:4000/people";
 
   const getStudent = async () => {
     const response = await fetch(URL);
@@ -17,7 +17,7 @@ function MainPage() {
   };
 
   const createStudent = async (studen) => {
-    // make post request to create student
+    // make post request to create person
     await fetch(URL, {
       method: "POST",
       headers: {
@@ -25,12 +25,12 @@ function MainPage() {
       },
       body: JSON.stringify(studen),
     });
-    // update list of student
+    // update list of person
     getStudent();
   };
 
   const updateStudent = async (studen, id) => {
-    // make put request to update student
+    // make put request to update person
     await fetch(URL + id, {
       method: "PUT",
       headers: {
@@ -38,16 +38,16 @@ function MainPage() {
       },
       body: JSON.stringify(studen),
     });
-    // update list of student
+    // update list of person
     getStudent();
   };
 
   const deleteStudent = async (id) => {
-    // make delete request to delete student
+    // make delete request to delete person
     await fetch(URL + id, {
       method: "DELETE",
     });
-    // update list of student
+    // update list of person
     getStudent();
   };
 
@@ -61,13 +61,13 @@ function MainPage() {
         <Route
           exact
           path="/"
-          element={<Index student={student} createStudent={createStudent} />}
+          element={<Index person={person} createStudent={createStudent} />}
         />
         <Route
-          path="/student/:id"
+          path="/person/:id"
           element={
             <Show
-              student={student}
+              person={person}
               updateStudent={updateStudent}
               deleteStudent={deleteStudent}
             />

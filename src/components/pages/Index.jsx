@@ -35,13 +35,13 @@ function Index(props) {
     
     
       const loaded = () => {
-        return props.student.map((student) => (
-          <div key={student._id} className="student">
-        <Link to={`/student/${student._id}`}><h1>{student.name}</h1></Link>
-        <img src={student.photo} alt={student.name} />
-        <h3>{student.quote}</h3>
-        <h3>{student.location}</h3>
-        <a href={student.url} target="_blank" rel="noopener noreferrer">Linkedin</a>
+        return props.person.map((person) => (
+          <div key={person._id} className="person">
+        <Link to={`/person/${person._id}`}><h1>{person.name}</h1></Link>
+        <img src={person.photo} alt={person.name} />
+        <h3>{person.quote}</h3>
+        <h3>{person.location}</h3>
+        <a href={person.url} target="_blank" rel="noopener noreferrer">Linkedin</a>
       </div>
     ));
   };
@@ -87,9 +87,9 @@ function Index(props) {
         placeholder="location"
         onChange={handleChange}
       />
-        <input type="submit" value="Add Student" />
+        <input type="submit" value="Add Person" />
       </form>
-      {props.student ? loaded() : loading()}
+      {props.person ? loaded() : loading()}
     </section>
   );
 
