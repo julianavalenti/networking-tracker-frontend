@@ -5,20 +5,21 @@ import { useState, useEffect } from 'react';
 const Show = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
+  
   const people = props.person;
   console.log(id);
   
-  const person = person ? person.find((p) => p._id === id) : null;
+  const selectedPerson = people ? people.find((p) => p._id === id) : null;
 
-  const [editForm, setEditForm] = useState(person);
+  const [editForm, setEditForm] = useState(selectedPerson);
   
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (person) {
-      setEditForm(person);
+    if (selectedPerson) {
+      setEditForm(selectedPerson);
     }
-  }, [person]);
+  }, [selectedPerson]);
 
   // handling form data change
   const handleChange = (e) => {
@@ -31,7 +32,7 @@ const Show = (props) => {
   // handling submit event for edit form
   const handleUpdate = (e) => {
     e.preventDefault();
-    props.updateStudent(editForm, person._id);
+    props.updateStudent(editForm, selectedPerson._id);
   };
 
   const handleEdit = () => {
@@ -39,23 +40,23 @@ const Show = (props) => {
   };
 
   const handleDelete = () => {
-    props.deleteStudent(person._id);
+    props.deleteStudent(selectedPerson._id);
     navigate('/');
   };
 
   const loaded = () => {
     return (
       <>
-        <h1>{person.name}</h1>
-        <h2>{person.quote}</h2>
-        <h2>{person.linkedin}</h2>
-        <h2>{person.location}</h2>
+        <h1>{selectedPerson.name}</h1>
+        <h2>{selectedPerson.quote}</h2>
+        <h2>{selectedPerson.linkedin}</h2>
+        <h2>{selectedPerson.location}</h2>
         <img 
           className="avatar-image" 
-          src={person.photo} 
-          alt={person.name} 
+          src={selectedPerson.photo} 
+          alt={selectedPerson.name} 
         />
-        <h3>{person.title}</h3>
+        <h3>{selectedPerson.title}</h3>
         <button onClick={handleDelete}>Delete</button>
         <button onClick={handleEdit}>{ isEditing ? 'Cancel Edit' : 'Edit' }</button>
       </>
@@ -68,7 +69,7 @@ const Show = (props) => {
 
   return (
     <div className="person">
-      { person ? loaded() : loading() }
+      { selectedPerson ? loaded() : loading() }
 
       { isEditing &&
       <form onSubmit={handleUpdate}>
@@ -96,11 +97,10 @@ const Show = (props) => {
         <input
           type="text"
           value={editForm.linkedin}
-          name="linkedin" // Corrected attribute name
+          name="linkedin"
           placeholder="linkedin"
           onChange={handleChange}
-/>
-
+        />
         <input
           type="text"
           value={editForm.location}
