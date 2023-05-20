@@ -56,7 +56,9 @@ function MainPage() {
 
   return (
     <main id="main-page">
+      <h1 className="title">New Networking Info</h1>
       <Routes>
+       
         <Route
           exact
           path="/"

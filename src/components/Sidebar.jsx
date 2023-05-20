@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '../img/img.gif';
+
 import '../styles/components/sidebar.sass';
 import { Link } from 'react-router-dom';
 

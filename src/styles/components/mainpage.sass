@@ -12,7 +12,7 @@
   gap: 10%
   align-items: center
   background-color: transparent
-  margin-left: 40%
+  margin-left: 42%
   margin-right: auto
   position: absolute
   margin-top: 29vw
@@ -23,7 +23,7 @@
     font-size: .8vw
     text-align: center
     text-decoration: none
-    color: #000
+    color: #1D2E5E
     transition: color 0.3s
     // background-color: red
     &:hover
@@ -37,42 +37,60 @@
   margin: 0
   width: auto
 
-form
-  display: grid
-  grid-template-columns: 1fr 1fr
-  position: relative
-  grid-gap: 20px
-  width: 100%
-  height: 50%
-  border-radius: 20px
-  padding: 40px
-  box-sizing: border-box
-  background: #ecf0f3
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white
+.title
+    color: #1D2E5E 
+    padding: 2vw
+    display: flex
+    justify-content: center
+    align-items: center
+    text-align: center
+    font-family: 'Staatliches', cursive
 
-input
-  padding: .7rem
-  width: 100%
-  text-align: left
-  margin-top: 20px
-  display: block
-  border: none
-  outline: none
-  box-sizing: border-box
+form
+    margin: 2rem auto
+    display: flex
+    flex-direction: column
+    width: 100%
+    max-width: 425px
+    background-color: #f9f8f8
+    border-radius: 10px
+    box-shadow: 0 10px 20px 0 rgba(#999, .25)
+    padding: .75rem
+
+    input
+        display: flex
+        flex-direction: column-reverse
+        position: relative
+        padding-top: 1.5rem
+        padding-bottom: 1.5rem
+        padding-left: 1rem
+        border: none
+        border-radius: 0
+        border-bottom: 1px solid #95cad935
+        outline: none
+        
+    
 
 input::placeholder 
-  color: grey
+  color: #1D2E5E
+  font-family: 'Staatliches', cursive
+  font-size: 1rem
+  
+
+  
 
 #submit-btn
   color: white
-  margin-top: 20px
+  margin-top: 1vw
   background: #20ADCA
-  width: 20rem
-  height: 40px
+  width: 100%
+  height: 3rem
   border-radius: 15px
   cursor: pointer
-  font-weight: 900
+  font-weight: 500
   box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white
   transition: 0.5s
-  justify-self: center
-  grid-column: 1 / span 2
+ 
+  
+  
+
