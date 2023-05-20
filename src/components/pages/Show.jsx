@@ -52,7 +52,6 @@ const Show = (props) => {
         <h2>{selectedPerson.company}</h2>
         <h2>{selectedPerson.email}</h2>
         <h2>{selectedPerson.phone}</h2>
-        <h2>{selectedPerson.followup}</h2>
         <h2>{selectedPerson.notes}</h2>
         
 
@@ -107,13 +106,7 @@ const Show = (props) => {
           placeholder="phone"
           onChange={handleChange}
         />
-        <input
-          type="checkbox"
-          checked={editForm.followup}
-          name="followup"
-          placeholder="followup"
-          onChange={handleChange}
-        />
+        
         <input
         type="text"
         value={editForm.notes}

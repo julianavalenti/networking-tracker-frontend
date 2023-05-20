@@ -9,17 +9,13 @@ function Index(props) {
       company: "",
       email: "",
       phone: "",
-      followup: false,
       notes: "",
       });
     
        // handleChange function for form
        const handleChange = (event) => {
-        const { name, value, type, checked } = event.target;
-      
-        const fieldValue = type === 'checkbox' ? checked : value;
-      
-        setNewForm({ ...newForm, [name]: fieldValue });
+        const { name, value } = event.target;
+        setNewForm({ ...newForm, [name]: value });
       };
       
 
@@ -33,7 +29,6 @@ function Index(props) {
       company: "",
       email: "",
       phone: "",
-      followup: false,
       notes: "",
 
     });
@@ -51,7 +46,6 @@ function Index(props) {
         <h3>{person.company}</h3>
         <h3>{person.email}</h3>
         <h3>{person.phone}</h3>
-        <h3>{person.followup}</h3>
         <h3>{person.notes}</h3>
         
       </div>
@@ -64,7 +58,7 @@ function Index(props) {
 
   return (
     <section>
-      <form onSubmit={handleSubmit}>
+      <form  onSubmit={handleSubmit}>
         <input
           type="text"
           value={newForm.name}
@@ -100,14 +94,7 @@ function Index(props) {
           placeholder="phone"
           onChange={handleChange}
         />
-        
-        
-      <input
-        type="checkbox"
-        checked={newForm.followup} 
-        name="followup"
-        onChange={handleChange}
-      />
+  
       <input
         type="text"
         value={newForm.notes}
@@ -115,7 +102,7 @@ function Index(props) {
         placeholder="notes"
         onChange={handleChange}
       />
-        <input type="submit" value="Add Person" />
+        <input id="submit-btn" type="submit" value="Add Person" />
       </form>
       {props.person ? loaded() : loading()}
     </section>
