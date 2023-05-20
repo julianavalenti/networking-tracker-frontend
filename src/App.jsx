@@ -7,7 +7,8 @@ function App() {
   return (
     <Router>
       <div id="tracker">
-        <h1>Networking tracker</h1>
+      <img className="banner" src="src/img/banner2.jpg" alt="Image description" />
+
         <Sidebar />
         <MainPage />
       </div>

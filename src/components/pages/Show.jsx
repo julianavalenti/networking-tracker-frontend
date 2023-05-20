@@ -48,15 +48,14 @@ const Show = (props) => {
     return (
       <>
         <h1>{selectedPerson.name}</h1>
-        <h2>{selectedPerson.quote}</h2>
-        <h2>{selectedPerson.linkedin}</h2>
         <h2>{selectedPerson.location}</h2>
-        <img 
-          className="avatar-image" 
-          src={selectedPerson.photo} 
-          alt={selectedPerson.name} 
-        />
-        <h3>{selectedPerson.title}</h3>
+        <h2>{selectedPerson.company}</h2>
+        <h2>{selectedPerson.email}</h2>
+        <h2>{selectedPerson.phone}</h2>
+        <h2>{selectedPerson.followup}</h2>
+        <h2>{selectedPerson.notes}</h2>
+        
+
         <button onClick={handleDelete}>Delete</button>
         <button onClick={handleEdit}>{ isEditing ? 'Cancel Edit' : 'Edit' }</button>
       </>
@@ -82,32 +81,46 @@ const Show = (props) => {
         />
         <input
           type="text"
-          value={editForm.photo}
-          name="photo"
-          placeholder="person photo"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={editForm.quote}
-          name="quote"
-          placeholder="quote"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={editForm.linkedin}
-          name="linkedin"
-          placeholder="linkedin"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
           value={editForm.location}
           name="location"
           placeholder="location"
           onChange={handleChange}
         />
+        <input
+          type="text"
+          value={editForm.company}
+          name="company"
+          placeholder="company"
+          onChange={handleChange}
+        />
+        <input
+          type="email"
+          value={editForm.email}
+          name="email"
+          placeholder="email"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          value={editForm.phone}
+          name="phone"
+          placeholder="phone"
+          onChange={handleChange}
+        />
+        <input
+          type="checkbox"
+          checked={editForm.followup}
+          name="followup"
+          placeholder="followup"
+          onChange={handleChange}
+        />
+        <input
+        type="text"
+        value={editForm.notes}
+        name="notes"
+        placeholder="notes"
+        onChange={handleChange}
+      />
         <input type="submit" value="Update Person" />
       </form>
       }

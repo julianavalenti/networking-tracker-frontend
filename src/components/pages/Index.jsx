@@ -4,29 +4,37 @@ import { Link } from "react-router-dom";
 function Index(props) {
     
     const [ newForm, setNewForm ] = useState({
-        name: "",
-        photo: "",
-        quote:"",
-        linkedin: "",
-        location:""
-
+      name: "",
+      location: "",
+      company: "",
+      email: "",
+      phone: "",
+      followup: false,
+      notes: "",
       });
     
        // handleChange function for form
-  const handleChange = (event) => {
-    setNewForm({ ...newForm, [event.target.name]: event.target.value });
-  };
+       const handleChange = (event) => {
+        const { name, value, type, checked } = event.target;
+      
+        const fieldValue = type === 'checkbox' ? checked : value;
+      
+        setNewForm({ ...newForm, [name]: fieldValue });
+      };
+      
 
   // handle submit function for form
   const handleSubmit = (event) => {
     event.preventDefault();
     props.createPeople(newForm);
     setNewForm({
-        name: "",
-        photo: "",
-        quote:"",
-        linkedin: "",
-        location:""
+      name: "",
+      location: "",
+      company: "",
+      email: "",
+      phone: "",
+      followup: false,
+      notes: "",
 
     });
   };
@@ -34,14 +42,18 @@ function Index(props) {
 
     
     
-      const loaded = () => {
-        return props.person.map((person) => (
-          <div key={person._id} className="person">
+  const loaded = () => {
+    return props.person.map((person) => (
+      <div key={person._id} className="person">
         <Link to={`/person/${person._id}`}><h1>{person.name}</h1></Link>
-        <img src={person.photo} alt={person.name} />
-        <h3>{person.quote}</h3>
+          
         <h3>{person.location}</h3>
-        <a href={person.url} target="_blank" rel="noopener noreferrer">Linkedin</a>
+        <h3>{person.company}</h3>
+        <h3>{person.email}</h3>
+        <h3>{person.phone}</h3>
+        <h3>{person.followup}</h3>
+        <h3>{person.notes}</h3>
+        
       </div>
     ));
   };
@@ -62,29 +74,45 @@ function Index(props) {
         />
         <input
           type="text"
-          value={newForm.photo}
-          name="photo"
-          placeholder="image URL"
+          value={newForm.location}
+          name="location"
+          placeholder="location"
+          onChange={handleChange}
+      />
+      <input
+          type="text"
+          value={newForm.company}
+          name="company"
+          placeholder="company"
+          onChange={handleChange}
+        />
+        <input
+          type="email"
+          value={newForm.email}
+          name="email"
+          placeholder="Email"
           onChange={handleChange}
         />
         <input
           type="text"
-          value={newForm.quote}
-          name="quote"
-          placeholder="quote"
+          value={newForm.phone}
+          name="phone"
+          placeholder="phone"
           onChange={handleChange}
         />
-        <input
-          type="text"
-          value={newForm.linkedin}
-          name="quote"
-          placeholder="linkedin"
-          onChange={handleChange}
-        /><input
+        
+        
+      <input
+        type="checkbox"
+        checked={newForm.followup} 
+        name="followup"
+        onChange={handleChange}
+      />
+      <input
         type="text"
-        value={newForm.location}
-        name="location"
-        placeholder="location"
+        value={newForm.notes}
+        name="notes"
+        placeholder="notes"
         onChange={handleChange}
       />
         <input type="submit" value="Add Person" />
