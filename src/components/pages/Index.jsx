@@ -32,6 +32,7 @@ function Index(props) {
       notes: "",
 
     });
+    console.log(newForm)
   };
 
 
