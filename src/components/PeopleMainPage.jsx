@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import Show from "./pages/PeopleShow";
+import PeopleShow from "./pages/PeopleShow";
 import '../styles/components/mainpage.sass';
 
 const MainPage = (props) => {
@@ -83,10 +83,10 @@ const MainPage = (props) => {
         <Route
           path="/people/:id"
           element={
-            <Show
-              person={person}
-              updatePeople={updatePeople}
-              deletePeople={deletePeople}
+            <PeopleShow
+              // person={person}
+              // updatePeople={updatePeople}
+              // deletePeople={deletePeople}
             />
           }
         />

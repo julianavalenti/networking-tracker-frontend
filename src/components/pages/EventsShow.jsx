@@ -6,8 +6,8 @@ const EventsShow = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const events = props.event;
-  console.log(id);
+  
+  const [events, setEvents] = useState([]);
 
 
   const selectedEvent = events ? events.find((p) => p._id === id) : null;

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function EventsIndex(props) {
   const [newForm, setNewForm] = useState({
@@ -15,7 +16,26 @@ function EventsIndex(props) {
     const { name, value } = event.target;
     setNewForm({ ...newForm, [name]: value });
   };
+  
 
+
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/events");
+      const data = await response.json();
+      if (response.ok) {
+        setEvents(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // handle submit function for form
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,7 +52,7 @@ function EventsIndex(props) {
   const loaded = () => {
     return (
       <div className="events-grid">
-        {props.events.map((event) => (
+        {events.map((event) => (
           <div key={event._id} className="event">
             <Link to={`/events/${event._id}`}>
               <h1 className="event-name">{event.title}</h1>
@@ -92,7 +112,7 @@ function EventsIndex(props) {
         />
         <input id="submit-btn" type="submit" value="Add Event" />
       </form>
-      {props.events ? loaded() : loading()}
+      {events ? loaded() : loading()}
     </section>
   );
 }

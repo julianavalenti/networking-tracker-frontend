@@ -1,18 +1,29 @@
 import React from 'react'
-
+// import video1 from '../img/welcomevideo.mp4'
+import ReactPlayer from 'react-player'
 const Welcome = () => {
   return (
     <div className="welcome-message">
-    <h1>Welcome to the Networking App!</h1>
-    <p>Networking is key to career success. Our app helps you track people you meet and events you want to attend. Stay organized, build your network, and make the most of every opportunity.</p>
     
-    <h2>Features:</h2>
-    <ul>
-      <li>People Tracker: Remember valuable connections with contact info and notes.</li>
-      <li>Event Calendar: Stay updated on industry events and set reminders.</li>
-    </ul>
+    {/* <h2 className="signup-title">Sign Up</h2>
+      <form className="signup-form">
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input type="text" id="name" name="name" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" />
+        </div>
+        <button type="submit" className="signup-button">Sign Up</button>
+      </form>
+       */}
+    <ReactPlayer className="welcome-video" url={'src/img/welcomevideo.mp4'} controls={true} playing={true} loop={true}/>
     
-    <p>Take control of your networking journey. Build connections, discover opportunities, and reach new heights. Let's unlock the power of networking together!</p>
   </div>
 );
 };

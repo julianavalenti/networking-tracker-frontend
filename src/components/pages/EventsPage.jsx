@@ -7,23 +7,7 @@ import EventsShow from "./EventsShow";
 
 
 const EventsPage = () => {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
-  const fetchEvents = async () => {
-    try {
-      const response = await fetch("http://localhost:4000/api/events");
-      const data = await response.json();
-      if (response.ok) {
-        setEvents(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   const createEvent = async (eventData) => {
     try {
@@ -75,22 +59,7 @@ const EventsPage = () => {
   return (
     <main id="main-page">
       <h1 className="title">Events</h1>
-      <Routes>
-        <Route
-          path="/"
-          element={<EventsIndex events={events} createEvent={createEvent} />}
-        />
-        <Route
-          path="/events/:id"
-          element={
-            <EventsShow
-              events={events}
-              updateEvent={updateEvent}
-              deleteEvent={deleteEvent}
-            />
-          }
-        />
-      </Routes>
+      
     </main>
   );
 };

@@ -9,6 +9,7 @@ const Show = (props) => {
   const people = props.person;
   console.log(id);
   
+  
   const selectedPerson = people ? people.find((p) => p._id === id) : null;
 
   const [editForm, setEditForm] = useState(selectedPerson);
