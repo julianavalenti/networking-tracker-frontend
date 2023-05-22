@@ -45,7 +45,7 @@ function MainPage() {
   const updatePeople = async (personData, id) => {
     // make put request to update person
     await fetch(`${URL}/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },

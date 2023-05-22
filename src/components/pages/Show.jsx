@@ -37,7 +37,29 @@ const Show = (props) => {
 
   const handleEdit = () => {
     setIsEditing(prevState => !prevState);
+    fetch(`http://localhost:4000/api/people/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json" 
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        setEditForm({
+          name: data.name, 
+          location: data.location,
+          company: data.company,
+          email: data.email,
+          phone: data.phone,
+          notes: data.notes
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
+  
+      
 
   const handleDelete = () => {
     props.deletePeople(selectedPerson._id);
