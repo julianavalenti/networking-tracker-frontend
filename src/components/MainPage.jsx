@@ -7,7 +7,21 @@ import '../styles/components/mainpage.sass';
 function MainPage() {
   const [person, setPeople] = useState(null);
 
-  const URL = "http://localhost:4000/people";
+  const URL = "http://localhost:4000/api/people"; 
+  
+  useEffect(() => {
+    const fetchPeople = async () => {
+      const response = await fetch(URL);
+      const json = await response.json();
+  
+      if (response.ok) {
+        setPeople(json);
+      }
+    };
+    
+    fetchPeople();
+  }, []);
+  
 
   const getPeople = async () => {
     const response = await fetch(URL);
