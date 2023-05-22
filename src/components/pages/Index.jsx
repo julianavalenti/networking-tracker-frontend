@@ -39,19 +39,24 @@ function Index(props) {
     
     
   const loaded = () => {
-    return props.person.map((person) => (
-      <div key={person._id} className="person">
-        <Link to={`/person/${person._id}`}><h1>{person.name}</h1></Link>
-          
-        <h3>{person.location}</h3>
-        <h3>{person.company}</h3>
-        <h3>{person.email}</h3>
-        <h3>{person.phone}</h3>
-        <h3>{person.notes}</h3>
-        
+    return (
+      <div className="person-grid">
+        {props.person.map((person) => (
+          <div key={person._id} className="person">
+            <Link to={`/people/${person._id}`}>
+              <h1 className="person-name">{person.name}</h1>
+            </Link>
+            <h3 className="person-info">Location: {person.location}</h3>
+            <h3 className="person-info">Company: {person.company}</h3>
+            <h3 className="person-info">Email: {person.email}</h3>
+            <h3 className="person-info">Phone: {person.phone}</h3>
+            <h3 className="person-info">Notes: {person.notes}</h3>
+          </div>
+        ))}
       </div>
-    ));
+    );
   };
+  
 
   const loading = () => {
     return <h1>Loading...</h1>;

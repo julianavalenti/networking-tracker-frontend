@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/components/sidebar.sass';
+// import '../styles/components/sidebar.sass';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -9,7 +9,7 @@ const Sidebar = () => {
       <Link className="menu" to="/">
         HOME
       </Link>
-      <Link className="menu" to="/network">
+      <Link className="menu" to="/people">
         NETWORKING TRACKER
       </Link>
       <Link className="menu" to="/events">

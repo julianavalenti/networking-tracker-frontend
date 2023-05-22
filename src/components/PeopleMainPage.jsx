@@ -81,7 +81,7 @@ const MainPage = (props) => {
           element={<Index person={person} createPeople={createPeople} />}
         />
         <Route
-          path="/person/:id"
+          path="/people/:id"
           element={
             <Show
               person={person}
