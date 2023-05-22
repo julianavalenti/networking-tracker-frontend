@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import Show from "./pages/Show";
+import Show from "./pages/PeopleShow";
 import '../styles/components/mainpage.sass';
 
-function MainPage() {
+const MainPage = (props) => {
+  
   const [person, setPeople] = useState(null);
 
-  const URL = "http://localhost:4000/api/people"; 
+  const peopleURL = "http://localhost:4000/api/people"; 
   
   useEffect(() => {
     const fetchPeople = async () => {
-      const response = await fetch(URL);
+      const response = await fetch(peopleURL);
       const json = await response.json();
   
       if (response.ok) {
@@ -24,14 +25,14 @@ function MainPage() {
   
 
   const getPeople = async () => {
-    const response = await fetch(URL);
+    const response = await fetch(peopleURL);
     const data = await response.json();
     setPeople(data);
   };
 
   const createPeople = async (personData) => {
     // make post request to create person
-    await fetch(URL, {
+    await fetch(peopleURL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +45,7 @@ function MainPage() {
 
   const updatePeople = async (personData, id) => {
     // make put request to update person
-    await fetch(`${URL}/${id}`, {
+    await fetch(`${peopleURL}/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +58,7 @@ function MainPage() {
 
   const deletePeople = async (id) => {
     // make delete request to delete person
-    await fetch(`${URL}/${id}`, {
+    await fetch(`${peopleURL}/${id}`, {
       method: "DELETE",
     });
     // update list of person
@@ -67,6 +68,7 @@ function MainPage() {
   useEffect(() => {
     getPeople();
   }, []);
+
 
   return (
     <main id="main-page">

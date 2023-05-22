@@ -1,21 +1,26 @@
-import Sidebar from './components/Sidebar'
-import MainPage from './components/MainPage'
-import './styles/components/app.sass'
-import { BrowserRouter as Router } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import PeopleMainPage from './components/PeopleMainPage';
+import EventsPage from './components/pages/EventsPage';
+import './styles/components/app.sass';
 
 function App() {
   return (
     <Router>
       <div id="tracker">
-      <style>
+        <style>
           {`
           @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400&family=Staatliches&display=swap');
           `}
         </style>
-      <img className="banner" src="src/img/networking (1).svg" alt="Image description" />
+        <img className="banner" src="src/img/networking (1).svg" alt="Image description" />
 
         <Sidebar />
-        <MainPage />
+        <Routes>
+          <Route path="/" element={<PeopleMainPage />} />
+          <Route path="/events" element={<EventsPage />} />
+        </Routes>
       </div>
     </Router>
   );
