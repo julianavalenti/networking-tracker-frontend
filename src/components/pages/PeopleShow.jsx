@@ -1,42 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 const PeopleShow = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  
-  const people = props.person;
-  console.log(id);
-  
-  const selectedPerson = people ? people.find((p) => p._id === id) : null;
 
-  const [editForm, setEditForm] = useState(selectedPerson);
-  
+  const [selectedPerson, setSelectedPerson] = useState(null);
+  const [editForm, setEditForm] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (selectedPerson) {
-      setEditForm(selectedPerson);
-    }
-  }, [selectedPerson]);
+    const person = props.people.find((p) => p._id === id);
+    setSelectedPerson(person);
+    setEditForm(person);
+  }, [props.people, id]);
 
-  // handling form data change
   const handleChange = (e) => {
     setEditForm({
       ...editForm,
-      [e.target.name]: e.target.value 
+      [e.target.name]: e.target.value,
     });
   };
-  
-  // handling submit event for edit form
+
   const handleUpdate = (e) => {
     e.preventDefault();
     props.updatePeople(editForm, selectedPerson._id);
   };
 
   const handleEdit = () => {
-    setIsEditing(prevState => !prevState);
+    setIsEditing((prevState) => !prevState);
   };
 
   const handleDelete = () => {
@@ -53,10 +45,59 @@ const PeopleShow = (props) => {
         <h2>{selectedPerson.email}</h2>
         <h2>{selectedPerson.phone}</h2>
         <h2>{selectedPerson.notes}</h2>
-        
 
         <button onClick={handleDelete}>Delete</button>
-        <button onClick={handleEdit}>{ isEditing ? 'Cancel Edit' : 'Edit' }</button>
+        <button onClick={handleEdit}>
+          {isEditing ? 'Cancel Edit' : 'Edit'}
+        </button>
+
+        {isEditing && (
+          <form onSubmit={handleUpdate}>
+            <input
+              type="text"
+              value={editForm.name}
+              name="name"
+              placeholder="name"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.location}
+              name="location"
+              placeholder="location"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.company}
+              name="company"
+              placeholder="company"
+              onChange={handleChange}
+            />
+            <input
+              type="email"
+              value={editForm.email}
+              name="email"
+              placeholder="email"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.phone}
+              name="phone"
+              placeholder="phone"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.notes}
+              name="notes"
+              placeholder="notes"
+              onChange={handleChange}
+            />
+            <input type="submit" value="Update Person" />
+          </form>
+        )}
       </>
     );
   };
@@ -67,56 +108,7 @@ const PeopleShow = (props) => {
 
   return (
     <div className="person">
-      { selectedPerson ? loaded() : loading() }
-
-      { isEditing &&
-      <form onSubmit={handleUpdate}>
-        <input
-          type="text"
-          value={editForm.name}
-          name="name"
-          placeholder="name"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={editForm.location}
-          name="location"
-          placeholder="location"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={editForm.company}
-          name="company"
-          placeholder="company"
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          value={editForm.email}
-          name="email"
-          placeholder="email"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={editForm.phone}
-          name="phone"
-          placeholder="phone"
-          onChange={handleChange}
-        />
-        
-        <input
-        type="text"
-        value={editForm.notes}
-        name="notes"
-        placeholder="notes"
-        onChange={handleChange}
-      />
-        <input type="submit" value="Update Person" />
-      </form>
-      }
+      {selectedPerson ? loaded() : loading()}
     </div>
   );
 };

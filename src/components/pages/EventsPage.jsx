@@ -10,7 +10,7 @@ const EventsPage = () => {
 
   const createEvent = async (eventData) => {
     try {
-      const response = await fetch("http://localhost:4000/api/events", {
+      const response = await fetch("http://localhost:4000/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,7 @@ const EventsPage = () => {
 
   const updateEvent = async (eventData, id) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/events/${id}`, {
+      const response = await fetch(`http://localhost:4000/events/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const EventsPage = () => {
 
   const deleteEvent = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/events/${id}`, {
+      const response = await fetch(`http://localhost:4000/events/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {

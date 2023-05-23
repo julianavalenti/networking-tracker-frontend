@@ -10,7 +10,7 @@ const EventsShow = (props) => {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5173/api/events/${id}`)
+    fetch(`http://localhost:4000/events/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setSelectedEvent(data);

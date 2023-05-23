@@ -27,7 +27,7 @@ function EventsIndex(props) {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/events");
+      const response = await fetch("http://localhost:4000/events");
       const data = await response.json();
       if (response.ok) {
         setEvents(data);

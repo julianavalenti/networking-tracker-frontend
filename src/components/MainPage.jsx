@@ -7,7 +7,7 @@ import '../styles/components/mainpage.sass';
 function MainPage() {
   const [person, setPeople] = useState(null);
 
-  const URL = "http://localhost:4000/api/people"; 
+  const URL = "http://localhost:4000/people"; 
   
   useEffect(() => {
     const fetchPeople = async () => {
