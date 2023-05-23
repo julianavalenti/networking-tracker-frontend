@@ -28,15 +28,38 @@ const EventsShow = (props) => {
     });
   };
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    props.updateEvent(editForm, selectedEvent._id);
-    setIsEditing(false);
+    try {
+      const response = await fetch(`http://localhost:4000/events/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editForm),
+      });
+      if (response.ok) {
+        setIsEditing(false);
+        props.fetchEvents(); // Assuming you have a fetchEvents function in EventsPage
+        navigate('/events'); // Navigate back to the events page
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleDelete = () => {
-    props.deleteEvent(selectedEvent._id);
-    navigate('/');
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:4000/events/${id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        props.fetchEvents(); // Assuming you have a fetchEvents function in EventsPage
+        navigate('/events'); // Navigate back to the events page
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const loaded = () => {
@@ -101,11 +124,7 @@ const EventsShow = (props) => {
     return <h1>Loading ...</h1>;
   };
 
-  return (
-    <div className="event">
-      {selectedEvent ? loaded() : loading()}
-    </div>
-  );
+  return <div className="event">{selectedEvent ? loaded() : loading()}</div>;
 };
 
 export default EventsShow;
