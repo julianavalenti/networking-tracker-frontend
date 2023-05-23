@@ -5,7 +5,6 @@ import EventsShow from "./EventsShow";
 
 
 
-
 const EventsPage = () => {
   
 

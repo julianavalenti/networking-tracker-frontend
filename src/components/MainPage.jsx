@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import PeopleShow from "./pages/PeopleShow";
+import Show from "./pages/PeopleShow";
 import '../styles/components/mainpage.sass';
 
-const MainPage = (props) => {
-  
+function MainPage() {
   const [person, setPeople] = useState(null);
 
-  const peopleURL = "http://localhost:4000/api/people"; 
+  const URL = "http://localhost:4000/api/people"; 
   
   useEffect(() => {
     const fetchPeople = async () => {
-      const response = await fetch(peopleURL);
+      const response = await fetch(URL);
       const json = await response.json();
   
       if (response.ok) {
@@ -25,14 +24,14 @@ const MainPage = (props) => {
   
 
   const getPeople = async () => {
-    const response = await fetch(peopleURL);
+    const response = await fetch(URL);
     const data = await response.json();
     setPeople(data);
   };
 
   const createPeople = async (personData) => {
     // make post request to create person
-    await fetch(peopleURL, {
+    await fetch(URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,8 +44,8 @@ const MainPage = (props) => {
 
   const updatePeople = async (personData, id) => {
     // make put request to update person
-    await fetch(`${peopleURL}/${id}`, {
-      method: "PATCH",
+    await fetch(`${URL}/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -58,7 +57,7 @@ const MainPage = (props) => {
 
   const deletePeople = async (id) => {
     // make delete request to delete person
-    await fetch(`${peopleURL}/${id}`, {
+    await fetch(`${URL}/${id}`, {
       method: "DELETE",
     });
     // update list of person
@@ -68,7 +67,6 @@ const MainPage = (props) => {
   useEffect(() => {
     getPeople();
   }, []);
-
 
   return (
     <main id="main-page">
@@ -81,12 +79,12 @@ const MainPage = (props) => {
           element={<Index person={person} createPeople={createPeople} />}
         />
         <Route
-          path="/people/:id"
+          path="/person/:id"
           element={
-            <PeopleShow
-              // person={person}
-              // updatePeople={updatePeople}
-              // deletePeople={deletePeople}
+            <Show
+              person={person}
+              updatePeople={updatePeople}
+              deletePeople={deletePeople}
             />
           }
         />

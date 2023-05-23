@@ -2,13 +2,12 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const Show = (props) => {
+const PeopleShow = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
   
   const people = props.person;
   console.log(id);
-  
   
   const selectedPerson = people ? people.find((p) => p._id === id) : null;
 
@@ -38,29 +37,7 @@ const Show = (props) => {
 
   const handleEdit = () => {
     setIsEditing(prevState => !prevState);
-    fetch(`http://localhost:4000/api/people/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json" 
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        setEditForm({
-          name: data.name, 
-          location: data.location,
-          company: data.company,
-          email: data.email,
-          phone: data.phone,
-          notes: data.notes
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
   };
-  
-      
 
   const handleDelete = () => {
     props.deletePeople(selectedPerson._id);
@@ -144,4 +121,4 @@ const Show = (props) => {
   );
 };
 
-export default Show;
+export default PeopleShow;
