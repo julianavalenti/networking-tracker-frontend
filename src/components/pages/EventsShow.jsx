@@ -40,8 +40,8 @@ const EventsShow = (props) => {
       });
       if (response.ok) {
         setIsEditing(false);
-        props.fetchEvents(); // Assuming you have a fetchEvents function in EventsPage
-        navigate('/events'); // Navigate back to the events page
+        props.fetchEvents(); 
+        navigate('/events'); 
       }
     } catch (error) {
       console.log(error);
@@ -54,8 +54,8 @@ const EventsShow = (props) => {
         method: 'DELETE',
       });
       if (response.ok) {
-        props.fetchEvents(); // Assuming you have a fetchEvents function in EventsPage
-        navigate('/events'); // Navigate back to the events page
+        props.fetchEvents(); 
+        navigate('/events'); 
       }
     } catch (error) {
       console.log(error);

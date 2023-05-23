@@ -7,7 +7,7 @@ import '../styles/components/mainpage.sass';
 function MainPage() {
   const [person, setPeople] = useState(null);
 
-  const URL = "http://localhost:4000/people"; 
+  const URL = "https://network-tracker-backend-three.onrender.com/people"; 
   
   useEffect(() => {
     const fetchPeople = async () => {
