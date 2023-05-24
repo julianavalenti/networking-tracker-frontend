@@ -1,6 +1,7 @@
-import React from 'react';
+// EventsIndex.jsx
+
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 function EventsIndex(props) {
   const [newForm, setNewForm] = useState({
@@ -11,13 +12,10 @@ function EventsIndex(props) {
     notes: '',
   });
 
-  // handleChange function for form
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNewForm({ ...newForm, [name]: value });
   };
-  
-
 
   const [events, setEvents] = useState([]);
 
@@ -36,17 +34,33 @@ function EventsIndex(props) {
       console.log(error);
     }
   };
-  // handle submit function for form
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    props.createEvent(newForm);
-    setNewForm({
-      title: '',
-      location: '',
-      company: '',
-      date: '',
-      notes: '',
-    });
+    try {
+      const response = await fetch("http://localhost:4000/events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newForm),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setEvents([...events, data]); // Add the new event to the events state
+        setNewForm({
+          title: "",
+          location: "",
+          company: "",
+          date: "",
+          notes: "",
+        });
+      } else {
+        console.log("Error creating event");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const loaded = () => {
@@ -57,16 +71,15 @@ function EventsIndex(props) {
             <Link to={`/events/${event._id}`}>
               <h1 className="event-name">{event.title}</h1>
             </Link>
-            <h3 className="event-info">Location:{event.location}</h3>
-            <h3 className="event-info">Company:{event.company}</h3>
-            <h3 className="event-info">Date:{event.date}</h3>
-            <h3 className="event-info">Notes:{event.notes}</h3>
+            <h3 className="event-info">Location: {event.location}</h3>
+            <h3 className="event-info">Company: {event.company}</h3>
+            <h3 className="event-info">Date: {event.date}</h3>
+            <h3 className="event-info">Notes: {event.notes}</h3>
           </div>
         ))}
       </div>
     );
   };
-  
 
   const loading = () => {
     return <h1>Loading...</h1>;
@@ -79,40 +92,40 @@ function EventsIndex(props) {
           type="text"
           value={newForm.title}
           name="title"
-          placeholder="title"
+          placeholder="Title"
           onChange={handleChange}
         />
         <input
           type="text"
           value={newForm.location}
           name="location"
-          placeholder="location"
+          placeholder="Location"
           onChange={handleChange}
         />
         <input
           type="text"
           value={newForm.company}
           name="company"
-          placeholder="company"
+          placeholder="Company"
           onChange={handleChange}
         />
         <input
           type="date"
           value={newForm.date}
           name="date"
-          placeholder="date"
+          placeholder="Date"
           onChange={handleChange}
         />
         <input
           type="text"
           value={newForm.notes}
           name="notes"
-          placeholder="notes"
+          placeholder="Notes"
           onChange={handleChange}
         />
         <input id="submit-btn" type="submit" value="Add Event" />
       </form>
-      {events ? loaded() : loading()}
+      {events.length ? loaded() : loading()}
     </section>
   );
 }
