@@ -52,7 +52,7 @@ function Index(props) {
     );
   };
   const loading = () => {
-    return <h1>Loading...</h1>;
+    return <h1>No contacts registered</h1>;
   };
 
   return (

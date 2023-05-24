@@ -13,6 +13,7 @@ import './styles/components/app.sass';
 
 function App() {
   const [events, setEvents] = useState([]);
+  const [people, setPeople] = useState([]);
 
   useEffect(() => {
     fetchEvents();
@@ -20,7 +21,7 @@ function App() {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch("https://network-tracker-backend-three.onrender.com/events");
+      const response = await fetch('https://network-tracker-backend-three.onrender.com/events');
       const data = await response.json();
       if (response.ok) {
         setEvents(data);
@@ -46,10 +47,10 @@ function App() {
 
   const createEvent = async (newEventData) => {
     try {
-      const response = await fetch("https://network-tracker-backend-three.onrender.com/events", {
-        method: "POST",
+      const response = await fetch('https://network-tracker-backend-three.onrender.com/events', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(newEventData),
       });
@@ -57,7 +58,7 @@ function App() {
         // Fetch the updated events list
         fetchEvents();
       } else {
-        console.log("Error creating event");
+        console.log('Error creating event');
       }
     } catch (error) {
       console.log(error);
@@ -67,9 +68,9 @@ function App() {
   const updatePeople = async (updatedPeopleData, personId) => {
     try {
       const response = await fetch(`https://network-tracker-backend-three.onrender.com/people/${personId}`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(updatedPeopleData),
       });
@@ -77,22 +78,22 @@ function App() {
         fetchPeople();
         setIsEditing(false);
       } else {
-        console.log("Error updating person");
+        console.log('Error updating person');
       }
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   const deletePeople = async (personId) => {
     try {
       const response = await fetch(`https://network-tracker-backend-three.onrender.com/people/${personId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
       if (response.ok) {
         fetchPeople();
       } else {
-        console.log("Error deleting person");
+        console.log('Error deleting person');
       }
     } catch (error) {
       console.log(error);
@@ -115,9 +116,9 @@ function App() {
           <Route path="/people/*" element={<MainPage />} />
           <Route
             path="/people/:id/*"
-            element={<PeopleShow fetchPeople={fetchPeople} updatePeople={updatePeople} deletePeople={deletePeople} />}
+            element={<PeopleShow fetchPeople={fetchPeople} updatePeople={updatePeople} deletePeople={deletePeople} people={people} />}
           />
-          <Route path="/events" element={<EventsIndex createEvent={createEvent} events={events} fetchEvents={fetchEvents} />} />
+          <Route path="/events" element={<EventsIndex createEvent={createEvent} events={events} />} />
           <Route path="/events/:id" element={<EventsShow fetchEvents={fetchEvents} />} />
         </Routes>
       </div>

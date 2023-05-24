@@ -31,6 +31,10 @@ const PeopleShow = (props) => {
     }
   };
 
+  useEffect(() => {
+    fetchPerson(); // Fetch person data
+  }, [id]); // Add id as a dependency to refetch person when the id changes
+
   const handleChange = (e) => {
     setEditForm({
       ...editForm,
@@ -42,6 +46,7 @@ const PeopleShow = (props) => {
     e.preventDefault();
     await props.updatePeople(editForm, selectedPerson._id);
     setIsEditing(false);
+    navigate('/people');
   };
 
   const handleEdit = () => {
@@ -50,7 +55,7 @@ const PeopleShow = (props) => {
 
   const handleDelete = async () => {
     await props.deletePeople(selectedPerson._id);
-    navigate('/');
+    navigate('/people');
   };
 
   const loaded = () => {
@@ -80,6 +85,8 @@ const PeopleShow = (props) => {
           )}
         </>
       );
+    } else if (props.people.length === 0) {
+      return <h1>No contacts registered</h1>;
     } else {
       return loading();
     }

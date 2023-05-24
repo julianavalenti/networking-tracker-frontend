@@ -51,7 +51,7 @@ const EventsPage = () => {
       <Routes>
         <Route
           path="/"
-          element={<EventsIndex createEvent={createEvent} events={events} isLoading={isLoading} />}
+          element={<EventsIndex createEvent={createEvent} events={events} />}
         />
         <Route
           path="/events/:id"
