@@ -45,7 +45,7 @@ function EventsIndex(props) {
       });
       if (response.ok) {
         const data = await response.json();
-        setEvents([...events, data]); // Add the new event to the events state
+        createEvent(data); // Add the new event to the events state
         setNewForm({
           title: '',
           location: '',
