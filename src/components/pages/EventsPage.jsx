@@ -13,7 +13,7 @@ const EventsPage = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch('http://localhost:4000/events');
+      const response = await fetch('https://network-tracker-backend-three.onrender.com/events');
       const data = await response.json();
       if (response.ok) {
         setEvents(data);
@@ -27,7 +27,7 @@ const EventsPage = () => {
 
   const createEvent = async (newEventData) => {
     try {
-      const response = await fetch('http://localhost:4000/events', {
+      const response = await fetch('https://network-tracker-backend-three.onrender.com/events', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

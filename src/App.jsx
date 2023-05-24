@@ -20,7 +20,7 @@ function App() {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch("http://localhost:4000/events");
+      const response = await fetch("https://network-tracker-backend-three.onrender.com/events");
       const data = await response.json();
       if (response.ok) {
         setEvents(data);
@@ -32,7 +32,7 @@ function App() {
 
   const fetchPeople = async () => {
     try {
-      const response = await fetch('http://localhost:4000/people');
+      const response = await fetch('https://network-tracker-backend-three.onrender.com/people');
       if (!response.ok) {
         throw new Error('Failed to fetch people.');
       }
@@ -46,7 +46,7 @@ function App() {
 
   const createEvent = async (newEventData) => {
     try {
-      const response = await fetch("http://localhost:4000/events", {
+      const response = await fetch("https://network-tracker-backend-three.onrender.com/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,6 +58,41 @@ function App() {
         fetchEvents();
       } else {
         console.log("Error creating event");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updatePeople = async (updatedPeopleData, personId) => {
+    try {
+      const response = await fetch(`https://network-tracker-backend-three.onrender.com/people/${personId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedPeopleData),
+      });
+      if (response.ok) {
+        fetchPeople();
+        setIsEditing(false);
+      } else {
+        console.log("Error updating person");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  const deletePeople = async (personId) => {
+    try {
+      const response = await fetch(`https://network-tracker-backend-three.onrender.com/people/${personId}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        fetchPeople();
+      } else {
+        console.log("Error deleting person");
       }
     } catch (error) {
       console.log(error);
@@ -78,7 +113,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/people/*" element={<MainPage />} />
-          <Route path="/people/:id/*" element={<PeopleShow fetchPeople={fetchPeople} />} />
+          <Route
+            path="/people/:id/*"
+            element={<PeopleShow fetchPeople={fetchPeople} updatePeople={updatePeople} deletePeople={deletePeople} />}
+          />
           <Route path="/events" element={<EventsIndex createEvent={createEvent} events={events} fetchEvents={fetchEvents} />} />
           <Route path="/events/:id" element={<EventsShow fetchEvents={fetchEvents} />} />
         </Routes>

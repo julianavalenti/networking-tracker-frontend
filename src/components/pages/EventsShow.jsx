@@ -10,7 +10,7 @@ const EventsShow = (props) => {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/events/${id}`)
+    fetch(`https://network-tracker-backend-three.onrender.com/events/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setSelectedEvent(data);
@@ -31,7 +31,7 @@ const EventsShow = (props) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:4000/events/${id}`, {
+      const response = await fetch(`https://network-tracker-backend-three.onrender.com/events/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const EventsShow = (props) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/events/${id}`, {
+      const response = await fetch(`https://network-tracker-backend-three.onrender.com/events/${id}`, {
         method: 'DELETE',
       });
       if (response.ok) {

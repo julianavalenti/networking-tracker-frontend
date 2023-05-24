@@ -23,7 +23,7 @@ function EventsIndex(props) {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch('http://localhost:4000/events');
+      const response = await fetch('https://network-tracker-backend-three.onrender.com/events');
       const data = await response.json();
       if (response.ok) {
         setEvents(data);
@@ -36,7 +36,7 @@ function EventsIndex(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:4000/events', {
+      const response = await fetch('https://network-tracker-backend-three.onrender.com/events', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
