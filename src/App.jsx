@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import PeopleMainPage from './components/MainPage';
+import MainPage from './components/MainPage';
 import EventsPage from './components/pages/EventsPage';
 import Welcome from './components/pages/Welcome';
 import PeopleShow from './components/pages/PeopleShow';
@@ -27,6 +27,20 @@ function App() {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const fetchPeople = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/people');
+      if (!response.ok) {
+        throw new Error('Failed to fetch people.');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+      return [];
     }
   };
 
@@ -63,8 +77,8 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/" element={<Welcome />} />
-          <Route path="/people/*" element={<PeopleMainPage />} />
-          <Route path="/people/:id" element={<PeopleShow />} />
+          <Route path="/people/*" element={<MainPage />} />
+          <Route path="/people/:id/*" element={<PeopleShow fetchPeople={fetchPeople} />} />
           <Route path="/events" element={<EventsIndex createEvent={createEvent} events={events} fetchEvents={fetchEvents} />} />
           <Route path="/events/:id" element={<EventsShow fetchEvents={fetchEvents} />} />
         </Routes>
