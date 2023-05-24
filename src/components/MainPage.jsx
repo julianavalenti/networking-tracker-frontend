@@ -76,7 +76,7 @@ function MainPage() {
         <Route
           exact
           path="/"
-          element={<Index person={person} createPeople={createPeople} />}
+          element={<Index people={person} createPeople={createPeople} />}
         />
         <Route
           path="/person/:id"
