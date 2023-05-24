@@ -1,9 +1,9 @@
-// EventsIndex.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function EventsIndex(props) {
+  const { events, createEvent, isLoading } = props;
+
   const [newForm, setNewForm] = useState({
     title: '',
     location: '',
@@ -17,15 +17,13 @@ function EventsIndex(props) {
     setNewForm({ ...newForm, [name]: value });
   };
 
-  const [events, setEvents] = useState([]);
-
   useEffect(() => {
     fetchEvents();
   }, []);
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch("http://localhost:4000/events");
+      const response = await fetch('http://localhost:4000/events');
       const data = await response.json();
       if (response.ok) {
         setEvents(data);
@@ -38,10 +36,10 @@ function EventsIndex(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:4000/events", {
-        method: "POST",
+      const response = await fetch('http://localhost:4000/events', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(newForm),
       });
@@ -49,14 +47,14 @@ function EventsIndex(props) {
         const data = await response.json();
         setEvents([...events, data]); // Add the new event to the events state
         setNewForm({
-          title: "",
-          location: "",
-          company: "",
-          date: "",
-          notes: "",
+          title: '',
+          location: '',
+          company: '',
+          date: '',
+          notes: '',
         });
       } else {
-        console.log("Error creating event");
+        console.log('Error creating event');
       }
     } catch (error) {
       console.log(error);
@@ -64,6 +62,9 @@ function EventsIndex(props) {
   };
 
   const loaded = () => {
+    if (events.length === 0) {
+      return <h1>No events registered</h1>;
+    }
     return (
       <div className="events-grid">
         {events.map((event) => (
@@ -125,7 +126,7 @@ function EventsIndex(props) {
         />
         <input id="submit-btn" type="submit" value="Add Event" />
       </form>
-      {events.length ? loaded() : loading()}
+      {isLoading ? loading() : loaded()}
     </section>
   );
 }
