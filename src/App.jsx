@@ -19,7 +19,7 @@ function App() {
           @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400&family=Staatliches&display=swap');
           `}
         </style>
-        <img className="banner" src="src/img/banner.png" alt="Image description" />
+        <img className="banner" src="/banner.png" alt="Image description" />
 
         <Sidebar />
         <Routes>

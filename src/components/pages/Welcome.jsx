@@ -5,7 +5,7 @@ const Welcome = () => {
   return (
     <div className="welcome-message">
     
-    <img className="welcome-video" src="src/img/tracker.gif" alt="Tracker" width="600px" />
+    <img className="welcome-video" src="/tracker.gif" alt="Tracker" width="600px" />
 
     
   </div>
